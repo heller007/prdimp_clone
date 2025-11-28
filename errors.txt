@@ -27,12 +27,12 @@ Original Traceback (most recent call last):
     return self.collate_fn(data)
            ^^^^^^^^^^^^^^^^^^^^^
   File "/kaggle/working/prdimp_clone/ltr/data/loader.py", line 125, in ltr_collate_stack1
-    return TensorDict({key: ltr_collate_stack1([d[key] for d in batch]) for key in batch[0]})
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    shuffle (bool, optional): set to ``True`` to have the data reshuffled
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/kaggle/working/prdimp_clone/ltr/data/loader.py", line 125, in <dictcomp>
-    return TensorDict({key: ltr_collate_stack1([d[key] for d in batch]) for key in batch[0]})
+    shuffle (bool, optional): set to ``True`` to have the data reshuffled
                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/kaggle/working/prdimp_clone/ltr/data/loader.py", line 101, in ltr_collate_stack1
-    out = batch[0].new(storage).resize_(output_shape)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    elif isinstance(batch[0], TensorList):
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
 RuntimeError: Trying to resize storage that is not resizable
