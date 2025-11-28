@@ -15,6 +15,13 @@ def _check_use_shared_memory():
         return getattr(collate_lib, '_use_shared_memory')
     return torch.utils.data.get_worker_info() is not None
 
+def _shared_stack_tensor(batch):
+    if not isinstance(batch[0], torch.Tensor) or not _check_use_shared_memory():
+        return None
+    numel = sum(x.numel() for x in batch)
+    storage = batch[0].storage()._new_shared(numel)
+    return batch[0].new(storage).resize_(0)
+
 
 def ltr_collate(batch):
     """Puts each data field into a tensor with outer dimension batch size"""
@@ -22,13 +29,7 @@ def ltr_collate(batch):
     error_msg = "batch must contain tensors, numbers, dicts or lists; found {}"
     elem_type = type(batch[0])
     if isinstance(batch[0], torch.Tensor):
-        out = None
-        if _check_use_shared_memory():
-            # If we're in a background process, concatenate directly into a
-            # shared memory tensor to avoid an extra copy
-            numel = sum([x.numel() for x in batch])
-            storage = batch[0].storage()._new_shared(numel)
-            out = batch[0].new(storage)
+        out = _shared_stack_tensor(batch)
         return torch.stack(batch, 0, out=out)
         # if batch[0].dim() < 4:
         #     return torch.stack(batch, 0, out=out)
@@ -73,13 +74,7 @@ def ltr_collate_stack1(batch):
     error_msg = "batch must contain tensors, numbers, dicts or lists; found {}"
     elem_type = type(batch[0])
     if isinstance(batch[0], torch.Tensor):
-        out = None
-        if _check_use_shared_memory():
-            # If we're in a background process, concatenate directly into a
-            # shared memory tensor to avoid an extra copy
-            numel = sum([x.numel() for x in batch])
-            storage = batch[0].storage()._new_shared(numel)
-            out = batch[0].new(storage)
+        out = _shared_stack_tensor(batch)
         return torch.stack(batch, 1, out=out)
         # if batch[0].dim() < 4:
         #     return torch.stack(batch, 0, out=out)
