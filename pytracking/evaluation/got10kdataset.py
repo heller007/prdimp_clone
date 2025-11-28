@@ -6,6 +6,15 @@ from PIL import Image
 from pathlib import Path
 
 
+def _dedupe_split_suffix(path):
+    norm = os.path.normpath(path)
+    parts = norm.split(os.sep)
+    if len(parts) >= 2 and parts[-1] == parts[-2]:
+        parts.pop()
+        norm = os.sep.join(parts)
+    return norm
+
+
 class GOT10KDataset(BaseDataset):
     """ GOT-10k dataset.
 
@@ -20,10 +29,11 @@ class GOT10KDataset(BaseDataset):
     def __init__(self, split, vos_mode=False):
         super().__init__()
         # Split can be test, val, or ltrval (a validation split consisting of videos from the official train set)
-        if split == 'test' or split == 'val':
-            self.base_path = os.path.join(self.env_settings.got10k_path, split)
+        if split == 'test':
+            self.base_path = os.path.join(self.env_settings.got10k_path, 'test')
         else:
             self.base_path = os.path.join(self.env_settings.got10k_path, 'train')
+        self.base_path = _dedupe_split_suffix(self.base_path)
 
         self.sequence_list = self._get_sequence_list(split)
         self.split = split
