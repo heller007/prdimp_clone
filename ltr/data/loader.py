@@ -26,9 +26,18 @@ def ltr_collate(batch):
         if _check_use_shared_memory():
             # If we're in a background process, concatenate directly into a
             # shared memory tensor to avoid an extra copy
-            numel = sum([x.numel() for x in batch])
-            storage = batch[0].storage()._new_shared(numel)
-            out = batch[0].new(storage)
+            # Calculate the correct output shape for torch.stack
+            output_shape = (len(batch),) + batch[0].shape
+            # Calculate numel by multiplying all dimensions
+            numel = 1
+            for dim in output_shape:
+                numel *= dim
+            # Use untyped_storage() to avoid TypedStorage deprecation warning
+            if hasattr(batch[0], 'untyped_storage'):
+                storage = batch[0].untyped_storage()._new_shared(numel)
+            else:
+                storage = batch[0].storage()._new_shared(numel)
+            out = batch[0].new(storage).resize_(output_shape)
         return torch.stack(batch, 0, out=out)
         # if batch[0].dim() < 4:
         #     return torch.stack(batch, 0, out=out)
@@ -77,9 +86,19 @@ def ltr_collate_stack1(batch):
         if _check_use_shared_memory():
             # If we're in a background process, concatenate directly into a
             # shared memory tensor to avoid an extra copy
-            numel = sum([x.numel() for x in batch])
-            storage = batch[0].storage()._new_shared(numel)
-            out = batch[0].new(storage)
+            # Calculate the correct output shape for torch.stack at dim=1
+            # Shape will be: (batch[0].shape[0], len(batch), batch[0].shape[1], ...)
+            output_shape = batch[0].shape[:1] + (len(batch),) + batch[0].shape[1:]
+            # Calculate numel by multiplying all dimensions
+            numel = 1
+            for dim in output_shape:
+                numel *= dim
+            # Use untyped_storage() to avoid TypedStorage deprecation warning
+            if hasattr(batch[0], 'untyped_storage'):
+                storage = batch[0].untyped_storage()._new_shared(numel)
+            else:
+                storage = batch[0].storage()._new_shared(numel)
+            out = batch[0].new(storage).resize_(output_shape)
         return torch.stack(batch, 1, out=out)
         # if batch[0].dim() < 4:
         #     return torch.stack(batch, 0, out=out)
