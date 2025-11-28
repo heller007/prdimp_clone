@@ -1,10 +1,66 @@
-/kaggle/working/prdimp_clone/ltr/data/loader.py:83: UserWarning: An output with one or more elements was resized since it had shape [5971968], which does not match the required output shape [3, 8, 3, 288, 288]. This behavior is deprecated, and in a future PyTorch release outputs will not be resized unless they have zero elements. You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). (Triggered internally at /pytorch/aten/src/ATen/native/Resize.cpp:30.)
-  return torch.stack(batch, 1, out=out)
-/kaggle/working/prdimp_clone/ltr/data/loader.py:83: UserWarning: An output with one or more elements was resized since it had shape [96], which does not match the required output shape [3, 8, 4]. This behavior is deprecated, and in a future PyTorch release outputs will not be resized unless they have zero elements. You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). (Triggered internally at /pytorch/aten/src/ATen/native/Resize.cpp:30.)
-  return torch.stack(batch, 1, out=out)
-/kaggle/working/prdimp_clone/ltr/data/loader.py:83: UserWarning: An output with one or more elements was resized since it had shape [12288], which does not match the required output shape [3, 8, 128, 4]. This behavior is deprecated, and in a future PyTorch release outputs will not be resized unless they have zero elements. You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). (Triggered internally at /pytorch/aten/src/ATen/native/Resize.cpp:30.)
-  return torch.stack(batch, 1, out=out)
-/kaggle/working/prdimp_clone/ltr/data/loader.py:83: UserWarning: An output with one or more elements was resized since it had shape [3072], which does not match the required output shape [3, 8, 128]. This behavior is deprecated, and in a future PyTorch release outputs will not be resized unless they have zero elements. You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). (Triggered internally at /pytorch/aten/src/ATen/native/Resize.cpp:30.)
-  return torch.stack(batch, 1, out=out)
-/kaggle/working/prdimp_clone/ltr/data/loader.py:83: UserWarning: An output with one or more elements was resized since it had shape [8664], which does not match the required output shape [3, 8, 19, 19]. This behavior is deprecated, and in a future PyTorch release outputs will not be resized unless they have zero elements. You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). (Triggered internally at /pytorch/aten/src/ATen/native/Resize.cpp:30.)
-  return torch.stack(batch, 1, out=out)
+/kaggle/working/prdimp_clone/ltr/data/loader.py:22: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  storage = batch[0].storage()._new_shared(numel)
+/kaggle/working/prdimp_clone/ltr/data/loader.py:22: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  storage = batch[0].storage()._new_shared(numel)
+/kaggle/working/prdimp_clone/ltr/data/loader.py:22: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  storage = batch[0].storage()._new_shared(numel)
+/kaggle/working/prdimp_clone/ltr/data/loader.py:22: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  storage = batch[0].storage()._new_shared(numel)
+[train: 1, 1 / 3250] FPS: 2.7 (2.7)  ,  Loss/total: 6.27163  ,  Loss/bb_ce: 4.31637  ,  ClfTrain/clf_ce: 3.65301
+[train: 1, 2 / 3250] FPS: 4.6 (17.3)  ,  Loss/total: 5.90366  ,  Loss/bb_ce: 3.71018  ,  ClfTrain/clf_ce: 3.47732
+[train: 1, 3 / 3250] FPS: 5.9 (12.2)  ,  Loss/total: 5.67426  ,  Loss/bb_ce: 3.21974  ,  ClfTrain/clf_ce: 3.41137
+[train: 1, 4 / 3250] FPS: 6.7 (12.2)  ,  Loss/total: 5.42991  ,  Loss/bb_ce: 2.64689  ,  ClfTrain/clf_ce: 3.31248
+[train: 1, 5 / 3250] FPS: 7.4 (12.2)  ,  Loss/total: 5.39032  ,  Loss/bb_ce: 2.46506  ,  ClfTrain/clf_ce: 3.33342
+[train: 1, 6 / 3250] FPS: 7.9 (12.0)  ,  Loss/total: 5.42840  ,  Loss/bb_ce: 2.31252  ,  ClfTrain/clf_ce: 3.38852
+[train: 1, 7 / 3250] FPS: 8.3 (11.9)  ,  Loss/total: 5.40864  ,  Loss/bb_ce: 2.25414  ,  ClfTrain/clf_ce: 3.39372
+[train: 1, 8 / 3250] FPS: 8.6 (12.2)  ,  Loss/total: 5.36097  ,  Loss/bb_ce: 2.11371  ,  ClfTrain/clf_ce: 3.36601
+[train: 1, 9 / 3250] FPS: 8.9 (12.2)  ,  Loss/total: 5.33739  ,  Loss/bb_ce: 2.02542  ,  ClfTrain/clf_ce: 3.35792
+[train: 1, 10 / 3250] FPS: 9.2 (11.9)  ,  Loss/total: 5.30125  ,  Loss/bb_ce: 1.78112  ,  ClfTrain/clf_ce: 3.34120
+[train: 1, 11 / 3250] FPS: 9.4 (12.3)  ,  Loss/total: 5.26440  ,  Loss/bb_ce: 1.66289  ,  ClfTrain/clf_ce: 3.32986
+[train: 1, 12 / 3250] FPS: 9.6 (12.2)  ,  Loss/total: 5.31738  ,  Loss/bb_ce: 1.60660  ,  ClfTrain/clf_ce: 3.37038
+[train: 1, 13 / 3250] FPS: 9.7 (12.1)  ,  Loss/total: 5.31641  ,  Loss/bb_ce: 1.55240  ,  ClfTrain/clf_ce: 3.37288
+[train: 1, 14 / 3250] FPS: 9.9 (12.3)  ,  Loss/total: 5.29685  ,  Loss/bb_ce: 1.46715  ,  ClfTrain/clf_ce: 3.36449
+[train: 1, 15 / 3250] FPS: 10.0 (12.1)  ,  Loss/total: 5.30624  ,  Loss/bb_ce: 1.36028  ,  ClfTrain/clf_ce: 3.37711
+[train: 1, 16 / 3250] FPS: 10.1 (12.2)  ,  Loss/total: 5.32755  ,  Loss/bb_ce: 1.29284  ,  ClfTrain/clf_ce: 3.39202
+[train: 1, 17 / 3250] FPS: 10.2 (12.2)  ,  Loss/total: 5.31643  ,  Loss/bb_ce: 1.23511  ,  ClfTrain/clf_ce: 3.39100
+[train: 1, 18 / 3250] FPS: 10.3 (12.2)  ,  Loss/total: 5.33059  ,  Loss/bb_ce: 1.16297  ,  ClfTrain/clf_ce: 3.40701
+[train: 1, 19 / 3250] FPS: 10.4 (12.2)  ,  Loss/total: 5.32097  ,  Loss/bb_ce: 1.07184  ,  ClfTrain/clf_ce: 3.40046
+[train: 1, 20 / 3250] FPS: 10.5 (12.2)  ,  Loss/total: 5.29715  ,  Loss/bb_ce: 1.00133  ,  ClfTrain/clf_ce: 3.39000
+[train: 1, 21 / 3250] FPS: 10.5 (12.3)  ,  Loss/total: 5.31429  ,  Loss/bb_ce: 0.95716  ,  ClfTrain/clf_ce: 3.40098
+[train: 1, 22 / 3250] FPS: 10.6 (12.0)  ,  Loss/total: 5.30867  ,  Loss/bb_ce: 0.87905  ,  ClfTrain/clf_ce: 3.40013
+[train: 1, 23 / 3250] FPS: 10.6 (11.9)  ,  Loss/total: 5.31912  ,  Loss/bb_ce: 0.78921  ,  ClfTrain/clf_ce: 3.40713
+[train: 1, 24 / 3250] FPS: 10.7 (12.2)  ,  Loss/total: 5.29991  ,  Loss/bb_ce: 0.69480  ,  ClfTrain/clf_ce: 3.39715
+[train: 1, 25 / 3250] FPS: 10.8 (12.2)  ,  Loss/total: 5.31955  ,  Loss/bb_ce: 0.61616  ,  ClfTrain/clf_ce: 3.40648
+[train: 1, 26 / 3250] FPS: 10.8 (12.1)  ,  Loss/total: 5.30771  ,  Loss/bb_ce: 0.57133  ,  ClfTrain/clf_ce: 3.39799
+[train: 1, 27 / 3250] FPS: 10.8 (12.1)  ,  Loss/total: 5.29084  ,  Loss/bb_ce: 0.48454  ,  ClfTrain/clf_ce: 3.38832
+[train: 1, 28 / 3250] FPS: 10.9 (12.2)  ,  Loss/total: 5.26382  ,  Loss/bb_ce: 0.42760  ,  ClfTrain/clf_ce: 3.37362
+[train: 1, 29 / 3250] FPS: 10.9 (12.2)  ,  Loss/total: 5.25128  ,  Loss/bb_ce: 0.39895  ,  ClfTrain/clf_ce: 3.36496
+[train: 1, 30 / 3250] FPS: 11.0 (12.2)  ,  Loss/total: 5.24052  ,  Loss/bb_ce: 0.35471  ,  ClfTrain/clf_ce: 3.35800
+[train: 1, 31 / 3250] FPS: 11.0 (12.1)  ,  Loss/total: 5.22369  ,  Loss/bb_ce: 0.30413  ,  ClfTrain/clf_ce: 3.34845
+[train: 1, 32 / 3250] FPS: 11.0 (12.2)  ,  Loss/total: 5.22595  ,  Loss/bb_ce: 0.28298  ,  ClfTrain/clf_ce: 3.35191
+[train: 1, 33 / 3250] FPS: 11.1 (12.3)  ,  Loss/total: 5.21604  ,  Loss/bb_ce: 0.21913  ,  ClfTrain/clf_ce: 3.34642
+[train: 1, 34 / 3250] FPS: 11.1 (12.2)  ,  Loss/total: 5.22537  ,  Loss/bb_ce: 0.19868  ,  ClfTrain/clf_ce: 3.35674
+[train: 1, 35 / 3250] FPS: 11.1 (12.2)  ,  Loss/total: 5.22064  ,  Loss/bb_ce: 0.19241  ,  ClfTrain/clf_ce: 3.35405
+[train: 1, 36 / 3250] FPS: 11.2 (12.3)  ,  Loss/total: 5.21566  ,  Loss/bb_ce: 0.16046  ,  ClfTrain/clf_ce: 3.35181
+[train: 1, 37 / 3250] FPS: 11.2 (12.2)  ,  Loss/total: 5.21986  ,  Loss/bb_ce: 0.12147  ,  ClfTrain/clf_ce: 3.35780
+[train: 1, 38 / 3250] FPS: 11.2 (12.2)  ,  Loss/total: 5.20468  ,  Loss/bb_ce: 0.06665  ,  ClfTrain/clf_ce: 3.35009
+[train: 1, 39 / 3250] FPS: 11.2 (12.0)  ,  Loss/total: 5.19301  ,  Loss/bb_ce: 0.00487  ,  ClfTrain/clf_ce: 3.34383
+[train: 1, 40 / 3250] FPS: 11.2 (12.1)  ,  Loss/total: 5.19004  ,  Loss/bb_ce: -0.03143  ,  ClfTrain/clf_ce: 3.34266
+[train: 1, 41 / 3250] FPS: 11.3 (12.2)  ,  Loss/total: 5.17610  ,  Loss/bb_ce: -0.04853  ,  ClfTrain/clf_ce: 3.33378
+[train: 1, 42 / 3250] FPS: 11.3 (12.2)  ,  Loss/total: 5.18904  ,  Loss/bb_ce: -0.06409  ,  ClfTrain/clf_ce: 3.34360
+[train: 1, 43 / 3250] FPS: 11.3 (12.3)  ,  Loss/total: 5.18020  ,  Loss/bb_ce: -0.08010  ,  ClfTrain/clf_ce: 3.33855
+[train: 1, 44 / 3250] FPS: 11.3 (12.2)  ,  Loss/total: 5.17965  ,  Loss/bb_ce: -0.12176  ,  ClfTrain/clf_ce: 3.33895
+[train: 1, 45 / 3250] FPS: 11.3 (12.2)  ,  Loss/total: 5.17268  ,  Loss/bb_ce: -0.13380  ,  ClfTrain/clf_ce: 3.33370
+[train: 1, 46 / 3250] FPS: 11.4 (12.2)  ,  Loss/total: 5.17637  ,  Loss/bb_ce: -0.15217  ,  ClfTrain/clf_ce: 3.33848
+[train: 1, 47 / 3250] FPS: 11.4 (12.0)  ,  Loss/total: 5.17225  ,  Loss/bb_ce: -0.17519  ,  ClfTrain/clf_ce: 3.33493
+[train: 1, 48 / 3250] FPS: 11.4 (12.2)  ,  Loss/total: 5.18159  ,  Loss/bb_ce: -0.16672  ,  ClfTrain/clf_ce: 3.34009
+[train: 1, 49 / 3250] FPS: 11.4 (11.8)  ,  Loss/total: 5.17683  ,  Loss/bb_ce: -0.19898  ,  ClfTrain/clf_ce: 3.33794
+[train: 1, 50 / 3250] FPS: 11.4 (12.4)  ,  Loss/total: 5.17275  ,  Loss/bb_ce: -0.21822  ,  ClfTrain/clf_ce: 3.33732
+[train: 1, 51 / 3250] FPS: 11.4 (12.1)  ,  Loss/total: 5.16825  ,  Loss/bb_ce: -0.24444  ,  ClfTrain/clf_ce: 3.33501
+[train: 1, 52 / 3250] FPS: 11.4 (12.1)  ,  Loss/total: 5.16582  ,  Loss/bb_ce: -0.27273  ,  ClfTrain/clf_ce: 3.33374
+[train: 1, 53 / 3250] FPS: 11.5 (12.3)  ,  Loss/total: 5.15658  ,  Loss/bb_ce: -0.30198  ,  ClfTrain/clf_ce: 3.32850
+[train: 1, 54 / 3250] FPS: 11.5 (12.3)  ,  Loss/total: 5.15613  ,  Loss/bb_ce: -0.31586  ,  ClfTrain/clf_ce: 3.32903
+[train: 1, 55 / 3250] FPS: 11.5 (12.3)  ,  Loss/total: 5.15552  ,  Loss/bb_ce: -0.33231  ,  ClfTrain/clf_ce: 3.32933
+[train: 1, 56 / 3250] FPS: 11.5 (12.2)  ,  Loss/total: 5.15034  ,  Loss/bb_ce: -0.33417  ,  ClfTrain/clf_ce: 3.32577
+[train: 1, 57 / 3250] FPS: 11.5 (12.2)  ,  Loss/total: 5.14508  ,  Loss/bb_ce: -0.36603  ,  ClfTrain/clf_ce: 3.32283
+[train: 1, 58 / 3250] FPS: 11.5 (12.3)  ,  Loss/total: 5.14037  ,  Loss/bb_ce: -0.37971  ,  ClfTrain/clf_ce: 3.32073

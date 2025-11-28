@@ -15,13 +15,17 @@ def _check_use_shared_memory():
         return getattr(collate_lib, '_use_shared_memory')
     return torch.utils.data.get_worker_info() is not None
 
-def _shared_stack_tensor(batch):
-    if not isinstance(batch[0], torch.Tensor) or not _check_use_shared_memory():
+def _shared_stack_tensor(batch, stack_dim):
+    if not isinstance(batch[0], torch.Tensor):
         return None
-    numel = sum(x.numel() for x in batch)
-    storage = batch[0].storage()._new_shared(numel)
-    return batch[0].new(storage).resize_(0)
-
+    if not _check_use_shared_memory():
+        return None
+    example = batch[0]
+    if example.device.type != 'cpu':
+        return None
+    stacked_shape = list(example.shape)
+    stacked_shape.insert(stack_dim, len(batch))
+    return torch.empty(stacked_shape, dtype=example.dtype).share_memory_()
 
 def ltr_collate(batch):
     """Puts each data field into a tensor with outer dimension batch size"""
@@ -29,7 +33,7 @@ def ltr_collate(batch):
     error_msg = "batch must contain tensors, numbers, dicts or lists; found {}"
     elem_type = type(batch[0])
     if isinstance(batch[0], torch.Tensor):
-        out = _shared_stack_tensor(batch)
+        out = _shared_stack_tensor(batch, stack_dim=0)
         return torch.stack(batch, 0, out=out)
         # if batch[0].dim() < 4:
         #     return torch.stack(batch, 0, out=out)
@@ -74,7 +78,7 @@ def ltr_collate_stack1(batch):
     error_msg = "batch must contain tensors, numbers, dicts or lists; found {}"
     elem_type = type(batch[0])
     if isinstance(batch[0], torch.Tensor):
-        out = _shared_stack_tensor(batch)
+        out = _shared_stack_tensor(batch, stack_dim=1)
         return torch.stack(batch, 1, out=out)
         # if batch[0].dim() < 4:
         #     return torch.stack(batch, 0, out=out)
