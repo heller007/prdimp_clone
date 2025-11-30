@@ -29,11 +29,22 @@ class GOT10KDataset(BaseDataset):
     def __init__(self, split, vos_mode=False):
         super().__init__()
         # Split can be test, val, or ltrval (a validation split consisting of videos from the official train set)
+        base_got10k_path = self.env_settings.got10k_path
+        
+        # Handle different splits - check if split directory exists directly
         if split == 'test':
-            self.base_path = os.path.join(self.env_settings.got10k_path, 'test')
+            split_path = os.path.join(base_got10k_path, 'test')
+        elif split == 'val':
+            # Try val directory first, fallback to train if not found
+            split_path = os.path.join(base_got10k_path, 'val')
+            if not os.path.exists(split_path) or not os.path.exists(os.path.join(split_path, 'list.txt')):
+                # Fallback to train directory for ltrval-style validation
+                split_path = os.path.join(base_got10k_path, 'train')
         else:
-            self.base_path = os.path.join(self.env_settings.got10k_path, 'train')
-        self.base_path = _dedupe_split_suffix(self.base_path)
+            # For 'ltrval' or other splits, use train directory
+            split_path = os.path.join(base_got10k_path, 'train')
+        
+        self.base_path = _dedupe_split_suffix(split_path)
 
         self.sequence_list = self._get_sequence_list(split)
         self.split = split
