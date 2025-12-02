@@ -109,7 +109,7 @@ def load_network(network_dir=None, checkpoint=None, constructor_fun_name=None, c
 
 
 def load_weights(net, path, strict=True):
-    checkpoint_dict = torch.load(path)
+    checkpoint_dict = torch.load(path, weights_only=False)
     weight_dict = checkpoint_dict['net']
     net.load_state_dict(weight_dict, strict=strict)
     return net
@@ -122,7 +122,27 @@ def torch_load_legacy(path):
     _setup_legacy_env()
 
     # Load network
-    checkpoint_dict = torch.load(path, map_location='cpu')
+    # Use weights_only=False for PyTorch 2.6+ compatibility (checkpoint contains custom classes)
+    # Also add safe globals for NetConstructor class
+    try:
+        import torch.serialization
+        from ltr.admin.model_constructor import NetConstructor
+        # Add NetConstructor to safe globals for PyTorch 2.6+
+        if hasattr(torch.serialization, 'add_safe_globals'):
+            torch.serialization.add_safe_globals([NetConstructor])
+    except Exception as e:
+        # If safe globals not available, continue anyway
+        pass
+    
+    # PyTorch 2.6+ requires weights_only=False for custom classes
+    # Check if weights_only parameter exists (PyTorch 2.6+)
+    import inspect
+    sig = inspect.signature(torch.load)
+    if 'weights_only' in sig.parameters:
+        checkpoint_dict = torch.load(path, map_location='cpu', weights_only=False)
+    else:
+        # Older PyTorch versions
+        checkpoint_dict = torch.load(path, map_location='cpu')
 
     # Cleanup legacy
     _cleanup_legacy_env()
