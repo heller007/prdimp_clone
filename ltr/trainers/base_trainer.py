@@ -77,7 +77,8 @@ class BaseTrainer:
             except:
                 print('Training crashed at epoch {}'.format(epoch))
                 if fail_safe:
-                    self.epoch -= 1
+                    # Ensure epoch never goes below 0
+                    self.epoch = max(0, self.epoch - 1)
                     load_latest = True
                     print('Traceback for the error!')
                     print(traceback.format_exc())
