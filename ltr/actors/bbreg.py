@@ -52,7 +52,10 @@ class AtomBBKLActor(BaseActor):
         loss = self.objective(bb_scores, sample_density=proposal_density, gt_density=gt_density, mc_dim=1)
 
         # Return training stats
-        stats = {'Loss/total': loss.item(),
-                 'Loss/bb_ce': loss.item()}
+        # Ensure bb_ce is non-negative for display (KL divergence should be >= 0, negative values are numerical artifacts)
+        loss_val = loss.item()
+        bb_ce_display = max(0.0, loss_val) if loss_val < 0 else loss_val
+        stats = {'Loss/total': loss_val,
+                 'Loss/bb_ce': bb_ce_display}
 
         return loss, stats

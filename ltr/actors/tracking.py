@@ -161,8 +161,10 @@ class KLDiMPActor(BaseActor):
             raise Exception('ERROR: Loss was nan or inf!!!')
 
         # Log stats
+        # Ensure bb_ce is non-negative for display (KL divergence should be >= 0, negative values are numerical artifacts)
+        bb_ce_display = max(0.0, bb_ce.item()) if bb_ce.item() < 0 else bb_ce.item()
         stats = {'Loss/total': loss.item(),
-                 'Loss/bb_ce': bb_ce.item(),
+                 'Loss/bb_ce': bb_ce_display,
                  'Loss/loss_bb_ce': loss_bb_ce.item()}
         if 'test_clf' in self.loss_weight.keys():
             stats['Loss/target_clf'] = loss_target_classifier.item()
@@ -450,8 +452,10 @@ class DiMPSimpleActor(BaseActor):
             raise Exception('ERROR: Loss was nan or inf!!!')
 
         # Log stats
+        # Ensure bb_ce is non-negative for display (KL divergence should be >= 0, negative values are numerical artifacts)
+        bb_ce_display = max(0.0, bb_ce.item()) if bb_ce.item() < 0 else bb_ce.item()
         stats = {'Loss/total': loss.item(),
-                 'Loss/bb_ce': bb_ce.item(),
+                 'Loss/bb_ce': bb_ce_display,
                  'Loss/loss_bb_ce': loss_bb_ce.item()}
         if 'test_clf' in self.loss_weight.keys():
             stats['Loss/target_clf'] = loss_target_classifier.item()
